@@ -1,0 +1,12 @@
+{
+  "name": "Mute Task Complete Message",
+  "description": "This extension mutes all task complete message in chatwork.",
+  "version": "0.1",
+  "manifest_version": 3,
+  "content_scripts": [
+    {
+      "matches": ["https://*.chatwork.com/*"],
+      "js": ["muteTaskComplete.js"]
+    }
+  ]
+}
