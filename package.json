@@ -4,7 +4,8 @@
   "description": "",
   "main": "muteTaskComplete.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "format": "biome format --write ./muteTaskComplete.js",
+    "lint": "biome lint --apply ./muteTaskComplete.js"
   },
   "keywords": [],
   "author": "",
