@@ -42,7 +42,7 @@ function getIconElement(message) {
 		null,
 		XPathResult.FIRST_ORDERED_NODE_TYPE,
 	);
-	return evaluateResult.singleNodeValue;
+	return evaluateResult.singleNodeValue.cloneNode(true);
 }
 
 function getNameElement(message) {
@@ -52,7 +52,7 @@ function getNameElement(message) {
 		null,
 		XPathResult.FIRST_ORDERED_NODE_TYPE,
 	);
-	return evaluateResult.singleNodeValue;
+	return evaluateResult.singleNodeValue.cloneNode(true);
 }
 
 function appendSpeaker(message, icon, name) {
@@ -61,12 +61,15 @@ function appendSpeaker(message, icon, name) {
 }
 
 function deleteMessageContext(message) {
-	message.children[0].remove();
+	message.hidden = true;
 }
 
 function muteTaskComplete() {
 	const messages = getAllTaskCompleteMessage();
 	for (const message of messages) {
+		if (message.hidden) {
+			continue;
+		}
 		// 消すメッセージがアイコンを持たないなら即削除
 		if (!messageHasSpeaker(message)) {
 			deleteMessageContext(message);
@@ -74,7 +77,7 @@ function muteTaskComplete() {
 		}
 		const nextMessage = getNextMessage(message);
 		// 次のメッセージが無いか削除済みなら即削除
-		if (!nextMessage || nextMessage.children.length === 0) {
+		if (!nextMessage || nextMessage.hidden) {
 			deleteMessageContext(message);
 			continue;
 		}
