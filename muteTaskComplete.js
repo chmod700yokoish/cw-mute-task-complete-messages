@@ -5,7 +5,7 @@ const SPEAKER_CLASS = "_speaker";
 
 function getAllTaskCompleteMessage() {
 	const evaluateResult = document.evaluate(
-		`//div[contains(@class,"${TASK_COMPLETE_CLASS}")]/ancestor::div[contains(@id, "${MESSAGE_ID_PREFIX}")]`,
+	    `//div[contains(@class,"${TASK_COMPLETE_CLASS}")]/ancestor::div[contains(@id, "${MESSAGE_ID_PREFIX}")][not(preceding-sibling::h2)]`,
 		document,
 		null,
 		XPathResult.UNORDERED_NODE_SNAPSHOT_TYPE,
